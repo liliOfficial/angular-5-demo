@@ -1,0 +1,38 @@
+<div class="fix">
+  <div class="login-page-2">
+    <div class="login">
+      <div class="login-body">
+        <a class="login-brand" ui-sref="dashboards.dashboard-1">
+          <span>BREAKABLE</span>
+          <!-- <img class="img-responsive" src="/assets/images/breakable-blue.png" alt="BREAKABLE"> -->
+        </a>
+        <div *ngIf="invalidLogin" class="incorrect-error">
+          Incorrect Email or Password.
+        </div>
+        <div class="login-form">
+          <form class="login-form" #f="ngForm" (ngSubmit)="signIn(f.value)">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input ngModel class="form-control" type="email" name="email" #email="ngModel" spellcheck="false" autocomplete="off" required>
+              <div *ngIf="email.touched && !email.valid">
+                <small class="has-error help-block">Please enter your email address.</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input ngModel class="form-control" type="password" name="password" #password="ngModel" minlength="6" required>
+              <div *ngIf="password.touched && !password.valid">
+                <small *ngIf="password.errors.required" class="has-error help-block">Please enter your password.</small>
+                <small *ngIf="password.errors.minlength" class="has-error help-block">Password must be 6 characters or more.</small>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid">Sign in</button>
+          </form>
+        </div>
+      </div>
+      <div class="login-footer">
+        2017 © BREAKABLE.COM
+      </div>
+    </div>
+  </div>
+</div>

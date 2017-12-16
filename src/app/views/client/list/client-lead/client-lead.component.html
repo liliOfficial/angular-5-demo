@@ -1,0 +1,202 @@
+<div class="layout-content-body">
+  <div class="title-bar">
+    <h1 class="title-bar-title">
+      <span class="d-ib">Leads</span>
+    </h1>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <!-- <div *ngIf="addLead">
+        <div class="row form-horizontal">
+          <form #f="ngForm" (ngSubmit)="submit(f)">
+            <div class="col-md-6">
+              <div class="form-group row gutter-xs">
+                <label class="col-md-3 control-label" for="form-control-1">Last Name *</label>
+                <div class="col-md-9">
+                  <input class="form-control" type="text" ngModel name="lastName" #lastName="ngModel" required>
+                  <span class="help-block" *ngIf="lastName.touched && !lastName.valid">Last name is required.</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row gutter-xs">
+                <label class="col-md-3 control-label" for="form-control-1">First Name *</label>
+                <div class="col-md-9">
+                  <input class="form-control" type="text" ngModel name="firstName" #firstName="ngModel" required>
+                  <span class="help-block" *ngIf="firstName.touched && !firstName.valid">First name is required.</span>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-6">
+              <div class="form-group row gutter-xs">
+                <label class="col-md-3 control-label" for="form-control-1">Phone *</label>
+                <div class="col-md-9">
+                  <input class="form-control" type="text" ngModel name="phone" #phone="ngModel" required>
+                  <span class="help-block" *ngIf="phone.touched && !phone.valid">Phone number is required.</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row gutter-xs">
+                <label class="col-md-3 control-label" for="form-control-1">Email</label>
+                <div class="col-md-9">
+                  <input class="form-control" type="text">
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-6" *ngFor="let label of labels">
+              <div class="form-group row gutter-xs">
+                <label class="col-md-3 control-label" for="form-control-1">{{label}}</label>
+                <div class="col-md-9">
+                  <input class="form-control" type="text">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row gutter-xs">
+                <label class="col-md-3 control-label" for="form-control-1">Social Media</label>
+                <div class="col-md-9">
+                  <div class="input-group">
+                    <div class="input-group-btn dropdown" [class.open]="socialSelect">
+                      <button class="btn btn-primary" type="button" (click)="socialSelect=!socialSelect">
+                        <span class="m-r-sm">{{socialType}}</span>
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a (click)="socialType = 'Wechat'; socialSelect = false">
+                            <span class="fa fa-weixin icon-md icon-fw"></span> Wechat
+                          </a>
+                        </li>
+                        <li>
+                          <a (click)="socialType = 'QQ'; socialSelect = false">
+                            <span class="fa fa-qq icon-md icon-fw"></span> QQ
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <input class="form-control" type="text">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <a class="pull-right">
+                <button class="btn btn-sm btn-primary" type="submit" [disabled]="!f.valid">
+                  <span class="fa fa-save icon-fw"></span> Save
+                </button>
+                <button class="btn btn-sm btn-danger" type="button" (click)="addLead = false">
+                  <span class="fa fa-close icon-fw"></span> Cancel
+                </button>
+              </a>
+            </div>
+          </form>
+          <div class="clearfix m-b-lg"></div>
+        </div>
+      </div> -->
+
+      <div class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+          <div class="col-sm-6">
+            <div>
+              <div class="btn-group dropdown" [class.open]="clientCategory">
+                <button class="btn btn-sm btn-primary" type="button">
+                  <span class="fa fa-filter icon-md icon-fw"></span> All
+                </button>
+                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" (click)="clientCategory=!clientCategory">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">All</a>
+                  </li>
+                  <li>
+                    <a href="#">Affiliate</a>
+                  </li>
+                  <li>
+                    <a href="#">Client</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- <button class="btn btn-primary btn-sm" type="button" (click)="addLead = true" *ngIf="!addLead">
+                <span class="fa fa-user-plus icon-md icon-fw"></span> Add
+              </button> -->
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_filter">
+              <label>
+                <input type="search" class="form-control input-sm" placeholder="Client ID/ Name/ Phone/ Email">
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table id="demo-datatables-rowreorder-2" class="table table-hover table-striped table-nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0"
+            width="100%" role="grid" style="width: 100%; position: relative;">
+            <thead>
+              <tr role="row">
+                <th>Client ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th class="text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row" class="odd" *ngFor="let client of clients">
+                <td class="sorting_1">{{client.clientId}}</td>
+                <td>
+                  <a [routerLink]="['/account-client',client.clientId]">{{client.name}}</a>
+                </td>
+                <td>{{client.phone}}</td>
+                <td>{{client.address}}</td>
+                <td>{{client.email}}</td>
+                <td class="text-center">{{client.status}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="dataTables_info">Showing 1 to 10 of 57 entries</div>
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_paginate paging_simple_numbers pull-right" id="demo-datatables-rowreorder-2_paginate">
+              <ul class="pagination">
+                <li class="paginate_button previous disabled" id="demo-datatables-rowreorder-2_previous">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="0" tabindex="0">«</a>
+                </li>
+                <li class="paginate_button active">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="1" tabindex="0">1</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="2" tabindex="0">2</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="3" tabindex="0">3</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="4" tabindex="0">4</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="5" tabindex="0">5</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="6" tabindex="0">6</a>
+                </li>
+                <li class="paginate_button next" id="demo-datatables-rowreorder-2_next">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="7" tabindex="0">»</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

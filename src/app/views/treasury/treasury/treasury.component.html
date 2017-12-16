@@ -1,0 +1,173 @@
+<div class="layout-content-body">
+  <div class="title-bar">
+    <h1 class="title-bar-title">
+      <span class="d-ib">Treasury</span>
+    </h1>
+  </div>
+  <div class="row gutter-xs">
+    <div class="col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <div id="demo-datatables-rowreorder-2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="row">
+              <div class="col-sm-6">
+                <div>
+                  <div class="btn-group dropdown" [class.open]="setStatus">
+                    <button class="btn btn-sm btn-primary" type="button">
+                      <span class="fa fa-wrench icon-md icon-fw"></span> Set Status As
+                    </button>
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" (click)="setStatus=!setStatus">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="#">Pending</a>
+                      </li>
+                      <li>
+                        <a href="#">Approved</a>
+                      </li>
+                      <li>
+                        <a href="#">Reject</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="btn-group dropdown" [class.open]="statusFilter">
+                    <button class="btn btn-sm btn-primary" type="button">
+                      <span class="fa fa-filter icon-md icon-fw"></span> All
+                    </button>
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" (click)="statusFilter=!statusFilter">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="#">Pending</a>
+                      </li>
+                      <li>
+                        <a href="#">Approved</a>
+                      </li>
+                      <li>
+                        <a href="#">Reject</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="dataTables_filter">
+                  <label>
+                    <input type="search" class="form-control input-sm" placeholder="Client ID/ Name/ Phone/ Email">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover table-striped table-bordered dataTable dt-rowReorder" cellspacing="0" width="100%" role="grid"
+                style="width: 100%; position: relative;">
+                <thead>
+                  <tr role="row">
+                    <th class="text-center">
+                      <label class="custom-control custom-control-primary custom-checkbox">
+                        <input class="custom-control-input" type="checkbox">
+                        <span class="custom-control-indicator"></span>
+                      </label>
+                    </th>
+                    <th>Client ID</th>
+                    <th>Affiliate ID</th>
+                    <th>Affiliate</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Order No.</th>
+                    <th>Payment Method</th>
+                    <th>Payment Code</th>
+                    <th>Payment Amount</th>
+                    <th>Currency</th>
+                    <th class="text-center">Admin</th>
+                    <th class="text-center">Action</th>
+                    <th>Comment</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr role="row" class="odd" *ngFor="let treasury of treasuries">
+                    <td class="text-center">
+                      <label class="custom-control custom-control-primary custom-checkbox">
+                        <input class="custom-control-input" type="checkbox">
+                        <span class="custom-control-indicator"></span>
+                      </label>
+                    </td>
+                    <td class="sorting_1">{{treasury.clientId}}</td>
+                    <td>{{treasury.affiliateId}}</td>
+                    <td>{{treasury.affiliated}}</td>
+                    <td>{{treasury.name}}</td>
+                    <td>{{treasury.email}}</td>
+                    <td>{{treasury.orderNo}}</td>
+                    <td>{{treasury.paymentMethod}}</td>
+                    <td>{{treasury.paymentCode}}</td>
+                    <td>{{treasury.paymentAmount}}</td>
+                    <td>{{treasury.currency}}</td>
+                    <td class="text-center">
+                      {{treasury.admin}}
+                    </td>
+                    <td class="text-center">
+                      <select class="status">
+                        <option *ngIf="treasury.status=='pending'">Pending</option>
+                        <option [selected]="treasury.status=='approve'">Approve</option>
+                        <option [selected]="treasury.status=='reject'">Reject</option>
+                      </select>
+                    </td>
+                    <td>
+                      
+                      <span class="comment">
+                        <input type="text" [(ngModel)]="treasury.comment">                        
+                        <a class="badge arrow-down arrow-default" *ngIf="treasury.comment">
+                          {{treasury.comment}}
+                        </a>
+                      </span>                      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="dataTables_info">Showing 1 to 10 of 57 entries</div>
+              </div>
+              <div class="col-sm-6">
+                <div class="dataTables_paginate paging_simple_numbers pull-right" id="demo-datatables-rowreorder-2_paginate">
+                  <ul class="pagination">
+                    <li class="paginate_button previous disabled" id="demo-datatables-rowreorder-2_previous">
+                      <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="0" tabindex="0">«</a>
+                    </li>
+                    <li class="paginate_button active">
+                      <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="1" tabindex="0">1</a>
+                    </li>
+                    <li class="paginate_button ">
+                      <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="2" tabindex="0">2</a>
+                    </li>
+                    <li class="paginate_button ">
+                      <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="3" tabindex="0">3</a>
+                    </li>
+                    <li class="paginate_button ">
+                      <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="4" tabindex="0">4</a>
+                    </li>
+                    <li class="paginate_button ">
+                      <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="5" tabindex="0">5</a>
+                    </li>
+                    <li class="paginate_button ">
+                      <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="6" tabindex="0">6</a>
+                    </li>
+                    <li class="paginate_button next" id="demo-datatables-rowreorder-2_next">
+                      <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="7" tabindex="0">»</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

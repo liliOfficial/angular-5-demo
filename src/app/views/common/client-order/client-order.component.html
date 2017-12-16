@@ -1,0 +1,286 @@
+<div class="layout-content-body">
+  <div class="title-bar">
+    <h1 class="title-bar-title">
+      Order
+    </h1>
+  </div>
+  <!-- Process Bar -->
+  <div class="panel panel-body" data-toggle="match-height">
+    <div class="row">
+      <div class="col-sm-4">
+        <button class="btn btn-xs btn-primary btn-pill m-b-sm" [class.btn-primary]="!chooseProduct">Choose Customer</button>
+      </div>
+      <div class="col-sm-4">
+        <button class="btn btn-xs btn-pill m-b-sm" [class.btn-primary]="chooseProduct">Choose Product</button>
+      </div>
+      <div class="col-sm-4">
+        <button class="btn btn-xs btn-danger btn-pill pull-right m-b-sm hidden-xs" (click)="rightBar=true">Check Order</button>
+        <button class="btn btn-xs btn-danger btn-pill m-b-sm hidden-lg hidden-md hidden-sm" (click)="rightBar=true">Check Order</button>
+      </div>
+    </div>
+    <div class="progress progress-xs hidden-xs">
+      <div class="progress-bar progress-bar-primary" style="width: 34%">
+        <span class="sr-only">Customer</span>
+      </div>
+      <div class="progress-bar progress-bar-primary" [style.width]="chooseProduct? '66%':'0'">
+        <span class="sr-only">Product</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <!-- Choose Client -->
+    <div class="card-body" *ngIf="!chooseProduct">
+      <div class="table-responsive">
+        <table id="demo-datatables-rowreorder-2" class="table table-hover table-striped table-bordered dataTable dt-rowReorder" cellspacing="0"
+          width="100%" role="grid" style="width: 100%; position: relative;">
+          <thead>
+            <tr role="row">
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Email</th>
+              <th>Photo ID</th>
+              <th>Social ID</th>
+              <th>group</th>
+              <th>Interest</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr role="row" class="odd" *ngFor="let client of clients">
+              <td class="sorting_1">{{client.name}}</td>
+              <td>{{client.phone}}</td>
+              <td>
+                <a [routerLink]="['/account-client',client.clientId]">{{client.name}}</a>
+              </td>
+              <td>{{client.address}}</td>
+              <td>{{client.email}}</td>
+              <td>
+                <img class="doc-img" [ngStyle]="{ 'background-image': 'url(' + client.idImage1 + ')'}">
+                <img class="doc-img" [ngStyle]="{ 'background-image': 'url(' + client.idImage2 + ')'}">
+              </td>
+              <td>{{client.socialIdType}} {{client.socialId}}</td>
+              <td>{{client.group}}</td>
+              <td class="text-center">
+                <button class="btn btn-primary btn-xs" type="button" (click)="chosenClient()">
+                  <span class="fa fa-check icon-fw"></span>
+                  Select
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Choose Product -->
+    <div class="card-body" *ngIf="chooseProduct">
+      <div class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+          <div class="col-sm-6">
+            <div>
+              <div class="btn-group dropdown" [class.open]="clientCategory">
+                <button class="btn btn-sm btn-primary" type="button">
+                  <span class="fa fa-filter icon-md icon-fw"></span> All
+                </button>
+                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" (click)="clientCategory=!clientCategory">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">All</a>
+                  </li>
+                  <li>
+                    <a href="#">Affiliate</a>
+                  </li>
+                  <li>
+                    <a href="#">Client</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_filter">
+              <label>
+                <input type="search" class="form-control input-sm" placeholder="Client ID/ Name/ Phone/ Email">
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table id="demo-datatables-rowreorder-2" class="table table-hover table-striped table-bordered dataTable dt-rowReorder" cellspacing="0"
+            width="100%" role="grid" style="width: 100%; position: relative;">
+            <thead>
+              <tr role="row">
+                <th>Pictures</th>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Current Quantity</th>
+                <th>Last Updated</th>
+                <th>Total Value</th>
+                <th>Unit Price</th>
+                <th>Recommended Price</th>
+                <th>Category</th>
+                <th>Order Quantity</th>
+                <th>Order</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row" class="odd" *ngFor="let order of orders">
+                <td>
+                  <img width=150 [src]="order.picture" alt="">
+                </td>
+                <td>{{order.productId}}</td>
+                <td>
+                  <a>{{order.productName}}</a>
+                </td>
+                <td>{{order.currentQuantity}}</td>
+                <td>{{order.lastUpdated}}</td>
+                <td>{{order.totalValue}}</td>
+                <td>{{order.unitPrice}}</td>
+                <td>{{order.recommendedPrice}}</td>
+                <td>{{order.categroy}}</td>
+                <td>
+                  <div style="color:#e74c3c;" *ngIf="order.orderedQuantity!=0">
+                    Ordered: {{order.orderedQuantity}}
+                  </div>
+                  <input type="number" min="0" style="width:90px;" [(ngModel)]="order.quantity">
+                </td>
+                <td>
+                  <span class="bg-primary circle sq-40" (click)="order()">
+                    <span class="fa fa-cart-plus"></span>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="dataTables_info">Showing 1 to 10 of 57 entries</div>
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_paginate paging_simple_numbers pull-right" id="demo-datatables-rowreorder-2_paginate">
+              <ul class="pagination">
+                <li class="paginate_button previous disabled" id="demo-datatables-rowreorder-2_previous">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="0" tabindex="0">«</a>
+                </li>
+                <li class="paginate_button active">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="1" tabindex="0">1</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="2" tabindex="0">2</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="3" tabindex="0">3</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="4" tabindex="0">4</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="5" tabindex="0">5</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="6" tabindex="0">6</a>
+                </li>
+                <li class="paginate_button next" id="demo-datatables-rowreorder-2_next">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="7" tabindex="0">»</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="theme">
+  <div class="theme-panel" [class.theme-panel-collapsed]="!rightBar">
+    <div class="theme-panel-controls">
+      <button class="theme-panel-toggler" type="button" (click)="rightBar=!rightBar">
+        <span class="fa fa-shopping-cart" *ngIf="!rightBar"></span>
+        <span class="fa fa-close" *ngIf="rightBar"></span>
+      </button>
+    </div>
+    <div class="theme-panel-body">
+      <div class="custom-scrollable-area" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
+        <div class="custom-scrollbar" style="overflow: hidden; width: 100%; height: 100%;">
+          <div class="custom-scrollbar-inner" style="padding:20px 15px;">
+            <h1 class="title-bar-title">
+              Order
+            </h1>
+            <ul class="theme-settings">
+              <li class="theme-settings-heading">
+                <div class="divider">
+                  <div class="divider-content">Client Info</div>
+                </div>
+              </li>
+              <li class="theme-settings-description" *ngIf="chooseProduct">
+                <h5>Name</h5>
+                <div>Zhang San</div>
+                <h5>Address</h5>
+                <div>12 Help Street, Chatswood, NSW, 2500</div>
+                <button class="btn btn-danger btn-xs m-t-sm" type="button" (click)="changeClient()">Change</button>
+              </li>
+              <li class="theme-settings-description" *ngIf="!chooseProduct">
+                Please Choose a Client
+              </li>
+              <li class="theme-settings-heading">
+                <div class="divider">
+                  <div class="divider-content">Orders</div>
+                </div>
+              </li>
+              <li *ngIf="chooseProduct">
+                <div *ngFor="let product of orderedProducts" class="m-b-md">
+                  <div class="ordered-product">
+                    <div class="m-b-sm">
+                      <span>
+                        <img width=48 height=48 [src]="product.picture" alt="" class="img-circle">
+                      </span>
+                      <span class="name">
+                        {{product.productName}}
+                      </span>
+                      <span class="bg-danger circle pull-right sq-24">
+                          <span class="fa fa-close"></span>
+                      </span>
+                    </div>
+                    <div>
+                      <span class="title">Price</span>
+                      <span>
+                        {{product.unitPrice}}
+                      </span>
+                      
+                    </div>
+                    <div>
+                      <span class="title">Quantity</span>
+                      <span>
+                        <input type="number" [(ngModel)]="product.orderedQuantity">
+                      </span>
+                    </div>
+                    <div class="m-b-sm total">
+                      <span class="title">Total</span>
+                      <span>
+                        {{product.unitPrice * product.orderedQuantity}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <hr class="theme-divider">
+            <h4 class="text-right" *ngIf="chooseProduct">
+              Total:
+              <span class="total-price"> $397.00</span>
+            </h4>
+          </div>
+        </div>
+        <div class="custom-scrollbar-gripper" style="background: rgb(0, 0, 0); width: 6px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 5px; height: 896px;"></div>
+        <div class="custom-scrollbar-track" style="width: 6px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 5px;"></div>
+      </div>
+    </div>
+    <div class="theme-panel-footer">
+      <button class="btn btn-primary btn-block" [disabled]="!chooseProduct">Submmit Order</button>
+    </div>
+  </div>
+</div>

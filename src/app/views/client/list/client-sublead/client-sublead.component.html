@@ -1,0 +1,40 @@
+<client-list>
+    <ng-container class="header">
+        <span class="d-ib">Sub Leads</span>
+    </ng-container>
+    <ng-container class="table">
+        <div class="table-responsive">
+            <table id="demo-datatables-rowreorder-2" class="table table-hover table-striped table-nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0"
+              width="100%" role="grid" style="width: 100%; position: relative;">
+              <thead>
+                <tr role="row">
+                  <th>Client ID</th>
+                  <th>Affiliated</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>Email</th>
+                  <th>Group</th>
+                  <th class="text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row" class="odd" *ngFor="let client of clients">
+                  <td class="sorting_1">{{client.clientId}}</td>
+                  <td>{{client.affiliated}}</td>
+                  <td>
+                    <a [routerLink]="['/account-client',client.clientId]">{{client.name}}</a>
+                  </td>
+                  <td>{{client.phone}}</td>
+                  <td>{{client.address}}</td>
+                  <td>{{client.email}}</td>
+                  <td>{{client.group}}</td>
+                  <td class="text-center">{{client.status}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </ng-container>
+</client-list>
+
+

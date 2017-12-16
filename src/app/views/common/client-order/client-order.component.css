@@ -1,0 +1,26 @@
+.panel-body button {
+    width:130px;
+}
+
+.ordered-product {
+    padding:10px 0;
+}
+.ordered-product span{
+    display: inline-block;
+}
+
+.ordered-product span.title {
+    width:60px;
+    font-weight:600;
+}
+
+.ordered-product span.name {
+    font-size:18px;
+    font-weight:700;
+    padding-left:10px;
+}
+.total-price {
+    color:#e74c3c;
+    font-weight:700;
+}
+

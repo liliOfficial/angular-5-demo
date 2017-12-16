@@ -1,0 +1,510 @@
+<div class="layout-content-body">
+
+  <ul class="list-group list-group-divided">
+    <li class="list-group-item p-x-0 p-y-0">
+      <div class="row p-b-sm p-t-md" style="background:#fff;">
+        <div class="col-xs-4">
+          <h6 class="media-heading">
+            <span class="text-muted">Client ID</span>
+          </h6>
+          <h4 class="media-heading">{{client.clientId}}</h4>
+        </div>
+        <div class="col-xs-4">
+          <h6 class="media-heading">
+            <span class="text-muted">Client Type</span>
+          </h6>
+          <h4 class="media-heading">{{client.clientType}}</h4>
+        </div>
+        <div class="col-xs-4">
+          <h6 class="media-heading" *ngIf="client.affiliateId">
+            <span class="text-muted">Affiliate ID</span>
+          </h6>
+          <h4 class="media-heading">{{client.affiliateId}}</h4>
+        </div>
+        <div class="col-xs-4" *ngIf="client.affiliated">
+          <h6 class="media-heading">
+            <span class="text-muted">Affiliated</span>
+          </h6>
+          <h4 class="media-heading">{{client.affiliated}}</h4>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel m-b-lg">
+        <ul class="nav nav-tabs nav-justified">
+          <li [class.active]="viewActive=='info'">
+            <a (click)="viewActive='info'">Client Info</a>
+          </li>
+          <li [class.active]="viewActive=='order'">
+            <a (click)="viewActive='order'">Order History</a>
+          </li>
+          <li [class.active]="viewActive=='subAccount'" *ngIf="client.affiliateId">
+            <a (click)="viewActive='subAccount'">Sub Accounts</a>
+          </li>
+        </ul>
+        <div class="card" [ngSwitch]="viewActive">
+          <!-- Client Info -->
+          <div class="card-body" *ngSwitchCase="'info'">
+            <!-- Client Info Edit -->
+            <!-- <div>
+              <h4>
+                Client Information
+              </h4>
+              <div class="clear-fix m-b-lg"></div>
+              <div class="row form-horizontal">
+                <form #f="ngForm" (ngSubmit)="submit(f)">
+                  <div class="col-md-6">
+                    <div class="form-group row gutter-xs">
+                      <label class="col-md-3 control-label" for="form-control-1">Last Name *</label>
+                      <div class="col-md-9">
+                        <input class="form-control" type="text" ngModel name="lastName" #lastName="ngModel" required>
+                        <span class="help-block" *ngIf="lastName.touched && !lastName.valid">Last name is required.</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row gutter-xs">
+                      <label class="col-md-3 control-label" for="form-control-1">First Name *</label>
+                      <div class="col-md-9">
+                        <input class="form-control" type="text" ngModel name="firstName" #firstName="ngModel" required>
+                        <span class="help-block" *ngIf="firstName.touched && !firstName.valid">First name is required.</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="col-md-6">
+                    <div class="form-group row gutter-xs">
+                      <label class="col-md-3 control-label" for="form-control-1">Phone *</label>
+                      <div class="col-md-9">
+                        <input class="form-control" type="text" ngModel name="phone" #phone="ngModel" required>
+                        <span class="help-block" *ngIf="phone.touched && !phone.valid">Phone number is required.</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row gutter-xs">
+                      <label class="col-md-3 control-label" for="form-control-1">Email</label>
+                      <div class="col-md-9">
+                        <input class="form-control" type="text">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="col-md-6" *ngFor="let label of labels">
+                    <div class="form-group row gutter-xs">
+                      <label class="col-md-3 control-label" for="form-control-1">{{label}}</label>
+                      <div class="col-md-9">
+                        <input class="form-control" type="text">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row gutter-xs">
+                      <label class="col-md-3 control-label" for="form-control-1">Social Media</label>
+                      <div class="col-md-9">
+                        <div class="input-group">
+                          <div class="input-group-btn dropdown" [class.open]="socialSelect">
+                            <button class="btn btn-primary" type="button" (click)="socialSelect=!socialSelect">
+                              <span class="m-r-sm">{{socialType}}</span>
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <a (click)="socialType = 'Wechat'; socialSelect = false">
+                                  <span class="fa fa-weixin icon-md icon-fw"></span> Wechat
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="socialType = 'QQ'; socialSelect = false">
+                                  <span class="fa fa-qq icon-md icon-fw"></span> QQ
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <input class="form-control" type="text">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <a class="pull-right">
+                      <button class="btn btn-sm btn-primary" type="submit" [disabled]="!f.valid">
+                        <span class="fa fa-save icon-fw"></span> Save
+                      </button>
+                      <button class="btn btn-sm btn-danger" type="button">
+                        <span class="fa fa-close icon-fw"></span> Cancel
+                      </button>
+                    </a>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="clearfix m-y-lg"></div> -->
+            <!-- Change Password -->
+            <!-- <div>
+              <h4>
+                Password Setting
+              </h4>
+              <div class="input-group">
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">
+                    Generate
+                  </button>
+                </div>
+                <input class="form-control" type="text" placeholder="generate or input password">
+                <div class="input-group-btn">
+                  <button class="btn btn-primary" title="" data-container="body" data-placement="top" data-toggle="tooltip" type="button" data-original-title="Copy to clipboard">
+                    <span class="fa fa-save icon-fw"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix m-y-lg"></div> -->
+            <div class="row">
+              <div class="col-md-6">
+                <h4>
+                  Client Information
+                </h4>
+                <div class="row">
+                  <div class="col-md-3 info-title">Last Name:</div>
+                  <div class="col-md-9 info-content">{{client.lastName}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">First Name:</div>
+                  <div class="col-md-9 info-content">{{client.firstName}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">Phone:</div>
+                  <div class="col-md-9 info-content">{{client.phone}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">Email:</div>
+                  <div class="col-md-9 info-content">{{client.email}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">Address:</div>
+                  <div class="col-md-9 info-content">{{client.address}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">City:</div>
+                  <div class="col-md-9 info-content">{{client.city}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">State:</div>
+                  <div class="col-md-9 info-content">{{client.state}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">Country:</div>
+                  <div class="col-md-9 info-content">{{client.country}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">Zip Code:</div>
+                  <div class="col-md-9 info-content">{{client.zipCode}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">Group:</div>
+                  <div class="col-md-9 info-content">{{client.group}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">Interests:</div>
+                  <div class="col-md-9 info-content">{{client.interests}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">Social:</div>
+                  <div class="col-md-9 info-content">{{client.socialType}} {{client.socialNo}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 info-title">Status:</div>
+                  <div class="col-md-9 info-content">{{client.status}}</div>
+                </div>
+
+
+
+              </div>
+              <div class="col-md-6">
+                <h4>
+                  Document
+                </h4>
+                <h5 class="media-heading">
+                  <span class="info-title">ID No. </span>
+                  <span class="text-muted p-l-sm">{{client.photoIdNo}}</span>
+                </h5>
+                <div class="m-b-sm">
+                  <img class="info-img" width=120 height=120 [ngStyle]="{ 'background-image': 'url(' + client.idImage1 + ')'}">
+                  <img class="info-img" width=120 height=120 [ngStyle]="{ 'background-image': 'url(' + client.idImage2 + ')'}">
+                </div>
+                <h5 class="media-heading">
+                  <span class="info-title">Update Time: </span>
+                  <span class="text-muted p-l-sm">{{client.idUpdate}}</span>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <!-- Order History -->
+          <div class="card-body" *ngSwitchCase="'order'">
+            <div class="panel m-b-lg panel-border">
+              <ul class="nav nav-tabs">
+                <li (click)="activeRetail()" [class.active]="orderHistoryActive == 'retail'">
+                  <a class="cursor-pointer">
+                    <span class="fa fa-shopping-basket"></span> Retail
+                  </a>
+                </li>
+                <li (click)="activeAffiliate()" [class.active]="orderHistoryActive == 'affiliate'" *ngIf="client.affiliateId">
+                  <a class="cursor-pointer">
+                    <span class="fa fa-shopping-cart"></span> Affiliate
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div>
+                  <ul class="list-group list-group-divided">
+                    <li class="list-group-item p-x-0 p-y-0">
+                      <div class="row p-b-sm p-t-md" *ngIf="orderHistoryActive == 'retail'">
+                        <div class="col-sm-4">
+                          <h6 class="media-heading">
+                            <span class="text-muted">Most Bought Item</span>
+                          </h6>
+                          <h4 class="media-heading">{{client.retailMostBought}}</h4>
+                        </div>
+                        <div class="col-sm-4">
+                          <h6 class="media-heading">
+                            <span class="text-muted">Total Spending</span>
+                          </h6>
+                          <h4 class="media-heading">${{client.retailTotalSpending}}</h4>
+                        </div>
+                        <div class="col-sm-4">
+                          <h6 class="media-heading">
+                            <span class="text-muted">Total Profits</span>
+                          </h6>
+                          <h4 class="media-heading">${{client.retailTotalProfits}}</h4>
+                        </div>
+                      </div>
+                      <div class="row p-b-sm p-t-md" *ngIf="orderHistoryActive == 'affiliate'">
+                        <div class="col-sm-4">
+                          <h6 class="media-heading">
+                            <span class="text-muted">Most Bought Item</span>
+                          </h6>
+                          <h4 class="media-heading">{{client.affiliateMostBought}}</h4>
+                        </div>
+                        <div class="col-sm-4">
+                          <h6 class="media-heading">
+                            <span class="text-muted">Total Spending</span>
+                          </h6>
+                          <h4 class="media-heading">${{client.affiliateTotalSpending}}</h4>
+                        </div>
+                        <div class="col-sm-4">
+                          <h6 class="media-heading">
+                            <span class="text-muted">Total Profits</span>
+                          </h6>
+                          <h4 class="media-heading">${{client.affiliateTotalProfits}}</h4>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped table-bordered dataTable dt-rowReorder" cellspacing="0" width="100%" role="grid"
+                    style="width: 100%; position: relative;">
+                    <thead>
+                      <tr role="row">
+                        <th>Order ID</th>
+                        <th>Order Date</th>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Buy Price</th>
+                        <th>Total Price</th>
+                        <th class="text-center">Invoice</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr role="row" class="odd" *ngFor="let order of orders">
+                        <td class="sorting_1">
+                          {{order.id}}
+                          <span *ngIf="order.productId.length > 3" class="fa fa-chevron-circle-down m-l-md"></span>
+                        </td>
+                        <td>{{order.date}}</td>
+                        <td>
+                          <div *ngFor="let productId of order.productId">
+                            {{productId}}
+                          </div>
+                        </td>
+                        <td>
+                          <div *ngFor="let productName of order.productName">
+                            {{productName}}
+                          </div>
+                        </td>
+                        <td>
+                          <div *ngFor="let quantity of order.quantity">
+                            {{quantity}}
+                          </div>
+                        </td>
+                        <td>
+                          <div *ngFor="let unitPrice of order.unitPrice">
+                            {{unitPrice}}
+                          </div>
+                        </td>
+                        <td>
+                          <div *ngFor="let buyPrice of order.buyPrice">
+                            {{buyPrice}}
+                          </div>
+                        </td>
+                        <td>{{order.totalPrice}}</td>
+                        <td class="text-center">
+                          <a class="bg-primary circle sq-40" [href]="order.invoice" target="_blank">
+                            <span class="fa fa-file-text"></span>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="dataTables_info">Showing 1 to 10 of 57 entries</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="dataTables_paginate paging_simple_numbers pull-right" id="demo-datatables-rowreorder-2_paginate">
+                      <ul class="pagination">
+                        <li class="paginate_button previous disabled" id="demo-datatables-rowreorder-2_previous">
+                          <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="0" tabindex="0">«</a>
+                        </li>
+                        <li class="paginate_button active">
+                          <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="1" tabindex="0">1</a>
+                        </li>
+                        <li class="paginate_button ">
+                          <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="2" tabindex="0">2</a>
+                        </li>
+                        <li class="paginate_button ">
+                          <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="3" tabindex="0">3</a>
+                        </li>
+                        <li class="paginate_button ">
+                          <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="4" tabindex="0">4</a>
+                        </li>
+                        <li class="paginate_button ">
+                          <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="5" tabindex="0">5</a>
+                        </li>
+                        <li class="paginate_button ">
+                          <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="6" tabindex="0">6</a>
+                        </li>
+                        <li class="paginate_button next" id="demo-datatables-rowreorder-2_next">
+                          <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="7" tabindex="0">»</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sub Accounts -->
+          <div class="card-body" *ngSwitchCase="'subAccount'">
+            <div class="panel m-b-lg panel-border">
+              <ul class="nav nav-tabs">
+                <li [class.active]="accountActive=='lead'" (click)="activeLead()">
+                  <a class="cursor-pointer">
+                    <span class="fa fa-user-o"></span> Sub Leads
+                  </a>
+                </li>
+                <li [class.active]="accountActive=='account'" (click)="activeAccount()">
+                  <a class="cursor-pointer">
+                    <span class="fa fa-user"></span> Sub Accounts
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="dataTables_wrapper form-inline dt-bootstrap">
+                  <div class="row">
+                    <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="dataTables_filter">
+                        <label>
+                          <input type="search" class="form-control input-sm" placeholder="Client ID/ Name/ Phone/ Email">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover table-striped table-nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid"
+                      style="width: 100%; position: relative;">
+                      <thead>
+                        <tr role="row">
+                          <th>Client ID</th>
+                          <th>Name</th>
+                          <th>Phone</th>
+                          <th>Address</th>
+                          <th>Email</th>
+                          <th>Group</th>
+                          <th>Most Bought Item</th>
+                          <th>Total Spending</th>
+                          <th>Total Profits</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr role="row" class="odd" *ngFor="let client of clients">
+                          <td>{{client.clientId}}</td>
+                          <td>
+                            <a [routerLink]="['/account-client',client.clientId]">{{client.name}}</a>
+                          </td>
+                          <td>{{client.phone}}</td>
+                          <td>{{client.address}}</td>
+                          <td>{{client.email}}</td>
+                          <td>{{client.group}}</td>
+                          <td>{{client.mostBought}}</td>
+                          <td>${{client.totalSpending}}</td>
+                          <td>${{client.totalProfits}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="dataTables_info">Showing 1 to 10 of 57 entries</div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="dataTables_paginate paging_simple_numbers pull-right" id="demo-datatables-rowreorder-2_paginate">
+                        <ul class="pagination">
+                          <li class="paginate_button previous disabled" id="demo-datatables-rowreorder-2_previous">
+                            <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="0" tabindex="0">«</a>
+                          </li>
+                          <li class="paginate_button active">
+                            <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="1" tabindex="0">1</a>
+                          </li>
+                          <li class="paginate_button ">
+                            <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="2" tabindex="0">2</a>
+                          </li>
+                          <li class="paginate_button ">
+                            <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="3" tabindex="0">3</a>
+                          </li>
+                          <li class="paginate_button ">
+                            <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="4" tabindex="0">4</a>
+                          </li>
+                          <li class="paginate_button ">
+                            <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="5" tabindex="0">5</a>
+                          </li>
+                          <li class="paginate_button ">
+                            <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="6" tabindex="0">6</a>
+                          </li>
+                          <li class="paginate_button next" id="demo-datatables-rowreorder-2_next">
+                            <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="7" tabindex="0">»</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

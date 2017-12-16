@@ -1,0 +1,106 @@
+<div class="layout-content-body">
+  <div class="title-bar">
+    <h1 class="title-bar-title">
+      <span class="d-ib">Material List</span>
+    </h1>
+  </div>
+  <div class="row gutter-xs">
+    <div class="col-xs-12">
+      <div class="panel m-b-lg">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a href="#home-51" data-toggle="tab">Chinese</a>
+          </li>
+          <li>
+            <a href="#profile-51" data-toggle="tab">English</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+            <div class="row">
+                <div class="col-sm-6">      
+                </div>
+                <div class="col-sm-6">
+                  <div class="dataTables_filter">
+                    <button class="btn btn-primary btn-sm" type="button" [routerLink]="['/material-detail',0]">
+                      <span class="fa fa-plus icon-md icon-fw"></span> Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped table-bordered dataTable dt-rowReorder" cellspacing="0" width="100%" role="grid"
+              style="width: 100%; position: relative;">
+              <thead>
+                <tr role="row">
+                  <th class="text-center">
+                    Priority
+                  </th>
+                  <th class="text-center">Sort</th>
+                  <th>Classification</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th class="text-center">Action</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row" class="odd" *ngFor="let material of materials">
+                  <td class="text-center">
+                    {{material.priority}}
+                    <td class="text-center">
+                        <span class="fa fa-arrow-circle-up icon-lg icon-fw"></span>
+                        <span class="fa fa-arrow-circle-down icon-lg icon-fw"></span>                      
+                    </td>
+                    <td>{{material.classification}}</td>
+                    <td>{{material.title}}</td>
+                    <td>{{material.description}}</td>
+                    <td class="text-center">
+                      <div class="btn-group" style="width:80px">
+                        <button class="btn btn-primary btn-xs" type="button" [routerLink]="['/material-detail',material.id]">Edit</button>
+                        <button class="btn btn-danger btn-xs" type="button">Delete</button>
+                      </div>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="dataTables_info">Showing 1 to 10 of 57 entries</div>
+            </div>
+            <div class="col-sm-6">
+              <div class="dataTables_paginate paging_simple_numbers pull-right" id="demo-datatables-rowreorder-2_paginate">
+                <ul class="pagination">
+                  <li class="paginate_button previous disabled" id="demo-datatables-rowreorder-2_previous">
+                    <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="0" tabindex="0">«</a>
+                  </li>
+                  <li class="paginate_button active">
+                    <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="1" tabindex="0">1</a>
+                  </li>
+                  <li class="paginate_button ">
+                    <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="2" tabindex="0">2</a>
+                  </li>
+                  <li class="paginate_button ">
+                    <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="3" tabindex="0">3</a>
+                  </li>
+                  <li class="paginate_button ">
+                    <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="4" tabindex="0">4</a>
+                  </li>
+                  <li class="paginate_button ">
+                    <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="5" tabindex="0">5</a>
+                  </li>
+                  <li class="paginate_button ">
+                    <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="6" tabindex="0">6</a>
+                  </li>
+                  <li class="paginate_button next" id="demo-datatables-rowreorder-2_next">
+                    <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="7" tabindex="0">»</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

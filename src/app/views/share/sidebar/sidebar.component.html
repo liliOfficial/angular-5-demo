@@ -1,0 +1,149 @@
+<div class="layout-sidebar-backdrop"></div>
+<div class="layout-sidebar-body">
+  <div class="custom-scrollbar" color="#fff" opacity=0.15>
+    <nav class="sidenav-collapse collapse" [class.in]="sidebarCollapsed">
+      <ul class="sidenav" [class.sidenav-collapsed]="sidebarCollapsed">
+        <li class="sidenav-search hidden-md hidden-lg">
+          <form class="sidenav-form" action="/">
+            <div class="form-group form-group-sm">
+              <div class="input-with-icon">
+                <input class="form-control" type="text" placeholder="Search…">
+                <span class="fa fa-search input-icon"></span>
+              </div>
+            </div>
+          </form>
+        </li>
+        <!-- Navigation -->
+        <li class="sidenav-item" routerLinkActive="">
+          <a routerLink="/">
+            <span class="sidenav-icon fa fa-home"></span>
+            <span class="sidenav-label">{{'Dashboard' | translate}}</span>
+          </a>
+        </li>
+        <!-- Administration -->
+        <li class="sidenav-heading">{{'Administration' | translate}}</li>
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="/administration/roles">
+            <span class="sidenav-icon fa fa-user-secret"></span>
+            <span class="sidenav-label">{{'Roles' | translate}}</span>
+          </a>
+        </li>
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="/administration/users">
+            <span class="sidenav-icon fa fa-users"></span>
+            <span class="sidenav-label">{{'Users' | translate}}</span>
+          </a>
+        </li>
+        <!-- Client -->
+        <li class="sidenav-heading">{{'Client' | translate}}</li>
+        <li class="sidenav-item has-subnav open" [class.open]="clientListOpen" routerLinkActive="active">
+          <a (click)="clientListOpen=!clientListOpen">
+            <span class="sidenav-icon fa fa-user"></span>
+            <span class="sidenav-label">Clients</span>
+          </a>
+          <ul class="sidenav-subnav collapse" [class.in]="clientListOpen">
+            <li class="sidenav-subheading">Clients</li>
+            <li routerLinkActive="active">
+              <a routerLink="client/lead">Leads</a>
+            </li>
+            <li routerLinkActive="active">
+              <a routerLink="/client/account">Accounts</a>
+            </li>
+            <li routerLinkActive="active">
+              <a routerLink="/client/affiliate">Affiliates</a>
+            </li>
+            <li routerLinkActive="active">
+              <a routerLink="client/sublead">Sub Leads</a>
+            </li>
+            <li routerLinkActive="active">
+              <a routerLink="client/subaccount">Sub Accounts</a>
+            </li>
+          </ul>
+        </li>
+        <li class="sidenav-item has-subnav open" [class.open]="clientTaskOpen" routerLinkActive="open active">
+          <a (click)="clientTaskOpen=!clientTaskOpen">
+            <span class="sidenav-icon fa fa-tasks"></span>
+            <span class="sidenav-label">Task</span>
+          </a>
+          <ul class="sidenav-subnav collapse" [class.in]="clientTaskOpen">
+            <li class="sidenav-subheading">Task</li>
+            <li routerLinkActive="active">
+              <a routerLink="/affiliate-task">
+                <!-- <span class="badge badge-danger">26</span> -->
+                Affiliate Task
+              </a>
+            </li>
+            <li routerLinkActive="active">
+              <a routerLink="/document-task">Document Task</a>
+            </li>
+          </ul>
+        </li>
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="/affiliate-setting">
+            <span class="sidenav-icon fa fa-cogs"></span>
+            <span class="sidenav-label">Affiliate Setting</span>
+          </a>
+        </li>
+        <!-- Treasury -->
+        <li class="sidenav-heading">Treasury</li>
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="/treasury/list">
+            <span class="sidenav-icon fa fa-money"></span>
+            <span class="sidenav-label">Treasury Task</span>
+          </a>
+        </li>
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="/treasury/setting">
+            <span class="sidenav-icon fa fa-sliders"></span>
+            <span class="sidenav-label">Treasury Setting</span>
+          </a>
+        </li>
+        <!-- Order -->
+        <li class="sidenav-heading">Orders</li>
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="/order/orders">
+            <span class="sidenav-icon fa fa-shopping-cart"></span>
+            <span class="sidenav-label">Orders</span>
+          </a>
+        </li>
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="/order/pending-orders">
+            <span class="sidenav-icon fa fa-clock-o"></span>
+            <span class="sidenav-label">Pending Orders</span>
+          </a>
+        </li>
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="/order/delivered-orders">
+            <span class="sidenav-icon fa fa-truck"></span>
+            <span class="sidenav-label">Dispatch Orders</span>
+          </a>
+        </li>
+        <!-- Others -->
+        <li class="sidenav-heading">Global Settings</li>
+
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="/material-list">
+            <span class="sidenav-icon fa fa-line-chart"></span>
+            <span class="sidenav-label">Marketing</span>
+          </a>
+        </li>
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="/freight-setting">
+            <span class="sidenav-icon fa fa-wrench"></span>
+            <span class="sidenav-label">Freight Setting</span>
+          </a>
+        </li>
+
+        <!-- Examples -->
+        <li class="sidenav-heading">Examples</li>
+        <li class="sidenav-item" routerLinkActive="open active">
+          <a routerLink="example/client-order">
+            <span class="sidenav-icon fa fa-shopping-cart"></span>
+            <span class="sidenav-label">Client Orders</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<!-- /.layout-sidebar-body -->

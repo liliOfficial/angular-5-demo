@@ -1,0 +1,77 @@
+<div class="layout-content-body">
+  <div class="title-bar">
+    <h1 class="title-bar-title">
+      <span class="d-ib">Affiliate Setting</span>
+    </h1>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <strong>Group</strong>
+    </div>
+    <div class="card-body">
+      <div class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+          <div class="col-sm-6">
+
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_filter">
+              <button class="btn btn-default btn-sm" type="button" (click)="addNew=true" *ngIf="!addNew && !editable">
+                <span class="fa fa-plus icon-md icon-fw"></span> Add
+              </button>
+              <button class="btn btn-warning btn-sm" type="button" (click)="addNew=false" *ngIf="addNew">
+                <span class="fa fa-close icon-md icon-fw"></span> Cancel Add
+              </button>
+              <button class="btn btn-primary btn-sm" type="button" (click)="editable=true" *ngIf="!editable && !addNew">
+                <span class="fa fa-edit icon-md icon-fw"></span> Edit
+              </button>
+              <button class="btn btn-info btn-sm" type="button" *ngIf="editable">
+                <span class="fa fa-save icon-md icon-fw"></span> Save Edit
+              </button>
+              <button class="btn btn-danger btn-sm" type="button" (click)="editable=false" *ngIf="editable">
+                <span class="fa fa-close icon-md icon-fw"></span> Cancel Edit
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" style="width: 100%; position: relative;">
+            <thead>
+              <tr role="row">
+                <th>Group</th>
+                <th *ngFor="let category of categories">
+                  {{category}}
+                </th>
+                <th *ngIf="editable"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row" class="odd" *ngFor="let group of groups">
+                <td >
+                  <input class="form-control" type="text" [(ngModel)]="group.name" [disabled]="!editable">
+                </td>
+                <td *ngFor="let category of categories">
+                  <input class="form-control" style="width:100%" type="text" [(ngModel)]="group.markup" [disabled]="!editable">
+                </td>
+                <td *ngIf="editable" class="text-center">
+                  <span class="bg-danger circle sq-24">
+                    <span class="icon icon-trash"></span>
+                  </span>
+                </td>
+              </tr>
+              <tr role="row" class="odd" *ngIf="addNew">
+                <td>
+                  <input class="form-control" type="text">
+                </td>
+                <td *ngFor="let category of categories">
+                  <input class="form-control" style="width:100%" type="text">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

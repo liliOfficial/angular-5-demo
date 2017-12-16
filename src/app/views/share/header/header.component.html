@@ -1,0 +1,133 @@
+<div class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand navbar-brand-center" routerLink="/">
+      <img class="navbar-brand-logo" src="/assets/images/breakable.png" alt="BREAKABLE">
+    </a>
+    <button class="navbar-toggler visible-xs-block collapsed" type="button" [class.collapsed]="!menuShow" (click)="menuClick()">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="bars">
+        <span class="bar-line bar-line-1 out"></span>
+        <span class="bar-line bar-line-2 out"></span>
+        <span class="bar-line bar-line-3 out"></span>
+      </span>
+      <span class="bars bars-x">
+        <span class="bar-line bar-line-4"></span>
+        <span class="bar-line bar-line-5"></span>
+      </span>
+    </button>
+    <button class="navbar-toggler visible-xs-block collapsed" type="button" [class.collapsed]="!accountShow" (click)="accountShow=!accountShow">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="arrow-up"></span>
+      <span class="ellipsis ellipsis-vertical">
+        <img class="ellipsis-object" width="32" height="32" src="/assets/images/photo.jpg"
+          alt="Teddy Wilson">
+      </span>
+    </button>
+  </div>
+  <!-- /.navbar-header .bg-primary -->
+  <div class="navbar-toggleable">
+    <nav class="navbar-collapse collapse" [class.in]="accountShow">
+      <button class="sidenav-toggler hidden-xs" type="button" [class.collapsed]="menuShow" (click)="menuClick()">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="bars">
+          <span class="bar-line bar-line-1 out"></span>
+          <span class="bar-line bar-line-2 out"></span>
+          <span class="bar-line bar-line-3 out"></span>
+          <span class="bar-line bar-line-4 in"></span>
+          <span class="bar-line bar-line-5 in"></span>
+          <span class="bar-line bar-line-6 in"></span>
+        </span>
+      </button>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="visible-xs-block">
+          <h4 class="navbar-text text-center">{{'Hello' | translate}}, Li Li</h4>
+        </li>
+        <li class="hidden-xs hidden-sm">
+          <form class="navbar-search navbar-search-collapsed" [class.navbar-search-collapsed]="!headSearch">
+            <div class="navbar-search-group">
+              <input class="navbar-search-input" type="text" placeholder="Search for people, companies, and more&hellip;">
+              <button class="navbar-search-toggler collapsed" [class.collapsed]="headSearch" (click)="headSearch=!headSearch">
+                <span class="fa fa-search icon-lg"></span>
+              </button>
+              <button class="navbar-search-adv-btn" type="button">Advanced</button>
+            </div>
+          </form>
+        </li>
+        <li class="dropdown" [class.open]="showLanguage">
+          <a class="dropdown-toggle" (click)="showLanguage=!showLanguage">
+            <span class="icon-with-child hidden-xs">
+                <img class="rounded"  height="15" src="/assets/images/gb.svg">
+
+            </span>
+            <span class="visible-xs-block">
+              <span class="fa fa-globe icon-lg icon-fw"></span>
+              Language
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-language">
+            <div class="dropdown-body">
+              <div class="list-group-divided">
+                <a class="list-group-item cursor-pointer" (click)="changeLanguage('en')">
+                  <div class="notification">
+                    <div class="notification-media">
+                      <img class="rounded"  height="15" src="/assets/images/gb.svg">
+                    </div>
+                    <div class="notification-content">
+                      <h5 class="notification-heading">English</h5>
+                    </div>
+                  </div>
+                </a>
+                <a class="list-group-item cursor-pointer" (click)="changeLanguage('cn')">
+                    <div class="notification">
+                      <div class="notification-media">
+                        <img class="rounded"  height="15" src="/assets/images/cn.svg">
+                      </div>
+                      <div class="notification-content">
+                        <h5 class="notification-heading">Chinese</h5>
+                      </div>
+                    </div>
+                  </a>
+              </div>
+              <!-- /.list-group .list-group-divided .custom-scrollbar -->
+            </div>
+            <!-- /.dropdown-body -->
+          </div>
+          <!-- /.dropdown-menu .dropdown-menu-right .dropdown-menu-lg -->
+        </li>
+        <li class="dropdown hidden-xs" [class.open]="navbarAccountOpen">
+          <button class="navbar-account-btn" (click)="navbarAccountOpen=!navbarAccountOpen">
+            <img class="circle" width="36" height="36" src="/assets/images/photo.jpg"
+              alt="photo">
+              <span class="p-l-sm">{{'Hello' | translate}}, Li Li</span>
+              
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li class="navbar-upgrade-version">Version: 1.0.0</li>
+            <li class="divider"></li>
+            <li>
+              <a>Setting</a>
+            </li>
+            <li>
+              <a routerLink="/login" (click)="authService.logout()">Sign out</a>
+            </li>
+          </ul>
+        </li>
+        <li class="visible-xs-block">
+          <a ui-sref="root.contacts">
+            <span class="fa fa-users icon-lg icon-fw"></span>
+            Setting
+          </a>
+        </li>
+        <li class="visible-xs-block">
+          <a routerLink="/login">
+            <span class="fa fa-power-off icon-lg icon-fw"></span>
+            Sign out
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!-- /.navbar-toggleable -->
+</div>
+<!-- /.navbar .navbar-default -->

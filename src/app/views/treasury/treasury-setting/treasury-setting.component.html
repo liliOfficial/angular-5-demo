@@ -1,0 +1,130 @@
+<div class="layout-content-body">
+  <div class="title-bar">
+    <h1 class="title-bar-title">
+      <span class="d-ib">Treasury Setting</span>
+    </h1>
+  </div>
+  <ul class="nav nav-tabs nav-justified">
+    <li [class.active]="viewActive=='gateway'">
+      <a (click)="viewActive='gateway'">Payment GateWay</a>
+    </li>
+    <li [class.active]="viewActive=='exchangeRate'">
+      <a (click)="viewActive='exchangeRate'">Exchange Rate</a>
+    </li>
+  </ul>
+  <div class="card" [ngSwitch]="viewActive">
+    <div class="card-body" *ngSwitchCase="'gateway'">
+      <div class="dataTables_wrapper dt-bootstrap">
+        <div class="row">
+          <div class="col-sm-6">
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_filter">
+              <button class="btn btn-default btn-sm" type="button" (click)="addNew=true" *ngIf="!addNew && !editable">
+                <span class="fa fa-plus icon-md icon-fw"></span> Add
+              </button>
+              <button class="btn btn-warning btn-sm" type="button" (click)="addNew=false" *ngIf="addNew">
+                <span class="fa fa-close icon-md icon-fw"></span> Cancel Add
+              </button>
+              <button class="btn btn-primary btn-sm" type="button" (click)="editable=true" *ngIf="!editable && !addNew">
+                <span class="fa fa-edit icon-md icon-fw"></span> Edit
+              </button>
+              <button class="btn btn-info btn-sm" type="button" *ngIf="editable">
+                <span class="fa fa-save icon-md icon-fw"></span> Save Edit
+              </button>
+              <button class="btn btn-danger btn-sm" type="button" (click)="cancel()" *ngIf="editable">
+                <span class="fa fa-close icon-md icon-fw"></span> Cancel Edit
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover table-striped table-bordered dataTable dt-rowReorder" cellspacing="0" width="100%" role="grid"
+            style="width: 100%; position: relative;">
+            <thead>
+              <tr role="row">
+                <th>Name</th>
+                <th>Chinese Name</th>
+                <th>Provider</th>
+                <th>Code</th>
+                <th>Account</th>
+                <th>Implement Date</th>
+                <th *ngIf="editable"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row" class="odd" *ngFor="let gateway of gateWays">
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="gateway.name" [disabled]="!editable">
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="gateway.chineseName" [disabled]="!editable">
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="gateway.provider" [disabled]="!editable">
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="gateway.code" [disabled]="!editable">
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="gateway.account" [disabled]="!editable">
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="gateway.account" [disabled]="!editable">
+                </td>
+                <td *ngIf="editable" class="text-center">
+                  <span class="bg-danger circle sq-24">
+                    <span class="icon icon-trash"></span>
+                  </span>
+                </td>
+              </tr>
+              <tr role="row" class="odd" *ngIf="addNew">
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" *ngSwitchCase="'exchangeRate'">
+      <form class="form form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="">Base Currency</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" value="AUD" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="">CNY Exchange Rate</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input id="form-control-17" class="form-control" type="text" value="5.2" readonly>
+              <div class="input-group-btn">
+                <button class="btn btn-primary" type="button" disabled>
+                  <span class="icon icon-save icon-fw"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

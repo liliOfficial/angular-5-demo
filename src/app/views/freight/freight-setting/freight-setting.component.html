@@ -1,0 +1,135 @@
+<div class="layout-content-body">
+  <div class="title-bar">
+    <h1 class="title-bar-title">
+      <span class="d-ib">Freight Setting</span>
+    </h1>
+  </div>
+  <ul class="nav nav-tabs nav-justified">
+    <li [class.active]="viewActive=='setting'">
+      <a (click)="viewActive='setting'">Setting</a>
+    </li>
+    <li [class.active]="viewActive=='duty'">
+      <a (click)="viewActive='duty'">Duty</a>
+    </li>
+  </ul>
+  <div class="card" [ngSwitch]="viewActive">
+    <div class="card-body" *ngSwitchCase="'setting'">
+      <div class="dataTables_wrapper dt-bootstrap">
+        <div class="row">
+          <div class="col-sm-6">
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_filter">
+              <button class="btn btn-default btn-sm" type="button" (click)="addNew=true" *ngIf="!addNew && !editable">
+                <span class="fa fa-plus icon-md icon-fw"></span> Add
+              </button>
+              <button class="btn btn-warning btn-sm" type="button" (click)="addNew=false" *ngIf="addNew">
+                <span class="fa fa-close icon-md icon-fw"></span> Cancel Add
+              </button>
+              <button class="btn btn-primary btn-sm" type="button" (click)="editable=true" *ngIf="!editable && !addNew">
+                <span class="fa fa-edit icon-md icon-fw"></span> Edit
+              </button>
+              <button class="btn btn-info btn-sm" type="button" *ngIf="editable">
+                <span class="fa fa-save icon-md icon-fw"></span> Save Edit
+              </button>
+              <button class="btn btn-danger btn-sm" type="button" (click)="editable=false" *ngIf="editable">
+                <span class="fa fa-close icon-md icon-fw"></span> Cancel Edit
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table id="demo-datatables-rowreorder-2" class="table table-hover table-striped table-bordered dataTable dt-rowReorder" cellspacing="0"
+            width="100%" role="grid" style="width: 100%; position: relative;">
+            <thead>
+              <tr role="row">
+                <th>Freight Name</th>
+                <th>Cost/kg</th>
+                <th>Increment/kg</th>
+                <th>Min Weight</th>
+                <th>Min Cost</th>
+                <th>Logistics</th>
+                <th *ngIf="editable"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row" class="odd" *ngFor="let freight of freights">
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="freight.name" [disabled]="!editable">
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="freight.cost" [disabled]="!editable">
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="freight.increment" [disabled]="!editable">
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="freight.minWeight" [disabled]="!editable">
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="freight.minCost" [disabled]="!editable">
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="freight.logistics" [disabled]="!editable">
+                </td>
+                <td *ngIf="editable" class="text-center">
+                  <span class="bg-danger circle sq-24">
+                    <span class="icon icon-trash"></span>
+                  </span>
+                </td>
+              </tr>
+              <tr role="row" class="odd" *ngIf="addNew">
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <div class="card-body" *ngSwitchCase="'duty'">
+      <form class="form form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="">Remind Price</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input id="" class="form-control" type="text">
+              <span class="input-group-addon">AUD</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="">Terms(HTML)</label>
+          <div class="col-sm-9">
+            <textarea id="" class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-primary btn-sm" type="button">
+              <span class="fa fa-save icon-sm icon-fw"></span>
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,133 @@
+<div class="layout-content-body">
+  <div class="title-bar">
+    <h1 class="title-bar-title">
+      <span class="d-ib">Document</span>
+    </h1>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+          <div class="col-sm-6">
+            <div>
+              <div class="btn-group dropdown" [class.open]="clientCategory">
+                <button class="btn btn-sm btn-primary" type="button">
+                  <span class="fa fa-filter icon-md icon-fw"></span> All
+                </button>
+                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" (click)="clientCategory=!clientCategory">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">All</a>
+                  </li>
+                  <li>
+                    <a href="#">Approved</a>
+                  </li>
+                  <li>
+                    <a href="#">Rejected</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_filter">
+              <label>
+                <input type="search" class="form-control input-sm" placeholder="Client ID/ Name/ Phone/ Email">
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table id="demo-datatables-rowreorder-2" class="table table-hover table-striped table-bordered dataTable dt-rowReorder" cellspacing="0"
+            width="100%" role="grid" style="width: 100%; position: relative;">
+            <thead>
+              <tr role="row">
+                <th>No.</th>
+                <th>Client ID</th>
+                <th>Name</th>
+                <th>Create Time</th>
+                <th>ID No.</th>
+                <th>ID Image</th>
+                <th>Status</th>
+                <th>Admin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row" class="odd" *ngFor="let document of documents">
+                <td>{{document.no}}</td>
+                <td>{{document.clientId}}</td>
+                <td>
+                  <a [routerLink]="['/account-client',C16545]">{{document.name}}</a>
+                </td>
+                <td>{{document.createTime}}</td>
+                <td>{{document.idNo}}</td>
+                <td>
+                  <img class="doc-img" [ngStyle]="{ 'background-image': 'url(' + document.idImage1 + ')'}">
+                  <img class="doc-img" [ngStyle]="{ 'background-image': 'url(' + document.idImage2 + ')'}">
+                </td>
+                <td>
+                  <select class="status">
+                    <option *ngIf="document.status=='pending'">Pending</option>
+                    <option [selected]="document.status=='approve'">Approve</option>
+                    <option [selected]="document.status=='reject'">Reject</option>
+                  </select>
+                  <div *ngIf="document.status=='reject'">
+                    <select class="reason">
+                      <option>Select Reject Reason</option>
+                      <option *ngFor="let reason of rejectReasons">{{reason}}</option>
+                    </select>
+                    <button class="btn btn-xs btn-danger" type="button" [disabled]="!document.sentEmail">
+                      <span class="fa fa-envelope icon-xs icon-fw"></span>
+                      Email
+                    </button>
+                  </div>
+                </td>
+                <td>{{document.admin}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="dataTables_info">Showing 1 to 10 of 57 entries</div>
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_paginate paging_simple_numbers pull-right" id="demo-datatables-rowreorder-2_paginate">
+              <ul class="pagination">
+                <li class="paginate_button previous disabled" id="demo-datatables-rowreorder-2_previous">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="0" tabindex="0">«</a>
+                </li>
+                <li class="paginate_button active">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="1" tabindex="0">1</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="2" tabindex="0">2</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="3" tabindex="0">3</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="4" tabindex="0">4</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="5" tabindex="0">5</a>
+                </li>
+                <li class="paginate_button ">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="6" tabindex="0">6</a>
+                </li>
+                <li class="paginate_button next" id="demo-datatables-rowreorder-2_next">
+                  <a href="#" aria-controls="demo-datatables-rowreorder-2" data-dt-idx="7" tabindex="0">»</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

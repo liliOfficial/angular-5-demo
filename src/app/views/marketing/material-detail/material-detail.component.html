@@ -1,0 +1,68 @@
+<div class="layout-content-body">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-actions">
+        <button type="button" class="btn btn-xs btn-primary" title="Collapse" [routerLink]="['/material-list']">
+          <span class="fa fa-caret-left icon-xs icon-fw"></span> Back to list
+        </button>
+      </div>
+      <strong>Market Material Details</strong>
+    </div>
+    <div class="card-body">
+      <form action="" class="form form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="">Title</label>
+          <div class="col-sm-9">
+            <input id="" class="form-control" type="text" name="title">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="">Classification</label>
+          <div class="col-sm-9">
+            <select id="" class="form-control">
+              <option value="c-plus-plus">Solution</option>
+              <option value="css">Age Group</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Upload Picture</label>
+          <div class="col-lg-4 col-md-6 col-sm-9">            
+            <div class="picture">
+              <div class="col-xs-4 add-picture" *ngIf="pictures.length < 9">
+                <div class="add-area"></div>
+                <span class="fa fa-plus add-button"></span>
+              </div>
+              <div class="col-xs-4" *ngFor="let picture of pictures">
+                  <div style="width:100%;height:0; padding-bottom:100%;" [ngStyle]="{ 'background-image': 'url(' + picture + ')'}"></div>
+                  <span class="fa fa-close"></span>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- upload pictures -->
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Video URL</label>
+          <div class="col-sm-9">
+            <input id="" class="form-control" type="text" name="title">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="form-control-1">Description</label>
+          <div class="col-sm-9">
+            <textarea id="form-control-8" class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-primary btn-sm" type="button">
+              <span class="fa fa-save icon-sm icon-fw"></span>
+              Save
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
